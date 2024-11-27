@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workout Generator</title>
+</head>
+<body>
+  <h1>Workout Generator</h1>
+  <p>Select workout level and equipment:</p>
+  <form id="workoutForm">
+    <label for="level">Level:</label>
+    <select id="level" name="level">
+      <option value="Level 1">Level 1</option>
+      <option value="Level 2">Level 2</option>
+      <option value="Level 3">Level 3</option>
+    </select>
+    <br>
+    <label for="equipment">Equipment:</label>
+    <input type="text" id="equipment" name="equipment" placeholder="e.g., Dumbbells, Pull-up Bar">
+    <br>
+    <button type="button" onclick="generateWorkout()">Generate Workout</button>
+  </form>
+  <div id="output"></div>
+
+  <script>
+    async function generateWorkout() {
+      const level = document.getElementById('level').value;
+      const equipment = document.getElementById('equipment').value;
+
+      // Replace this with your Apps Script Web App URL
+      const response = await fetch('YOUR_WEB_APP_URL', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ level, equipment })
+      });
+
+      const result = await response.json();
+      document.getElementById('output').innerText = result.message || 'Error generating workout.';
+    }
+  </script>
+</body>
+</html>
